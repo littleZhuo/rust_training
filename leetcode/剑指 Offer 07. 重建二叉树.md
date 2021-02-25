@@ -34,6 +34,8 @@ impl Solution {
 1. 因为所有权的关系，树是用`Option<Rc<RefCell<TreeNode>>>`来封装的，Option是因为节点可能为空，Rc感觉非必须，所以RefCell也感觉非必须，还没实验。
 2. 另外为了减少递归过程中不必要的拷贝或者所有权转移，所有用了引用。
 
+至于`PartialEq`和`Eq`感觉非必要，应该是为了测试方便，本地删除后树还是可以正常建立。
+
 ```rust
 struct Solution;
 
