@@ -37,30 +37,6 @@ impl Solution {
 至于`PartialEq`和`Eq`感觉非必要，应该是为了测试方便，本地删除后树还是可以正常建立。
 
 ```rust
-struct Solution;
-
-// Definition for a binary tree node.
-#[derive(Debug, PartialEq, Eq)]
-pub struct TreeNode {
-  pub val: i32,
-  pub left: Option<Rc<RefCell<TreeNode>>>,
-  pub right: Option<Rc<RefCell<TreeNode>>>,
-}
-
-impl TreeNode {
-  #[inline]
-  pub fn new(val: i32) -> Self {
-    TreeNode {
-      val,
-      left: None,
-      right: None
-    }
-  }
-}
-
-use std::rc::Rc;
-use std::cell::RefCell;
-
 fn helper(preorder: &[i32], inorder: &[i32]) -> Option<Rc<RefCell<TreeNode>>> {
     if preorder.len() == 0 {
         return None;
@@ -84,10 +60,5 @@ impl Solution {
     pub fn build_tree(preorder: Vec<i32>, inorder: Vec<i32>) -> Option<Rc<RefCell<TreeNode>>> {
         helper(&preorder[..], &inorder[..])
     }
-}
-
-fn main() {
-    let r = Solution::build_tree(vec![3,9,20,15,7], vec![9,3,15,20,7]);
-    println!("{:?}", r);
 }
 ```
