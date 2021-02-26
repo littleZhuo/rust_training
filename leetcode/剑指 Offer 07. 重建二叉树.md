@@ -34,6 +34,20 @@ impl Solution {
 1. 因为所有权的关系，树是用`Option<Rc<RefCell<TreeNode>>>`来封装的，Option是因为节点可能为空，Rc感觉非必须，所以RefCell也感觉非必须，还没实验。
 2. 另外为了减少递归过程中不必要的拷贝或者所有权转移，所有用了引用。
 
+> 打脸来得很快，对智能指针的学习还是不认真，对于递归定义的类型，如果不引入智能指针，编译器就无法知道类型大小。报错如下：
+```rust
+5 | pub struct TreeNode {
+  | ^^^^^^^^^^^^^^^^^^^ recursive type has infinite size
+6 |   pub val: i32,
+7 |   pub left: Option<TreeNode>,
+  |             ---------------- recursive without indirection
+8 |   pub right: Option<TreeNode>,
+  |              ---------------- recursive without indirection
+```
+> 所以Rc是必须的，因为不存在共享所有权的情况，换成Box也行。
+> 
+> 但是如果没有RefCell，那么修改就成了问题。
+
 至于`PartialEq`和`Eq`感觉非必要，应该是为了测试方便，本地删除后树还是可以正常建立。
 
 ```rust
