@@ -21,9 +21,6 @@ impl Solution {
         dp[i] = max(dp[i], j as u64 * temp_value as u64);
       } 
     }
-    for len in dp.iter() {
-      println!("{}", len);
-    }
     return (dp[n] % 1000000007) as i32;
   }
 }
