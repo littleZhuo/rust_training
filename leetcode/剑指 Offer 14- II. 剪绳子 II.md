@@ -1,4 +1,6 @@
-这道题是[剪绳子I](https://leetcode-cn.com/problems/jian-sheng-zi-lcof/)的升华，但是可恶的是直接用DP会有问题，因为用例会有超大的`n`，导致中间计算出来的结果翻转。
+这道题是[剪绳子I](https://leetcode-cn.com/problems/jian-sheng-zi-lcof/)的升华，但是可恶的是直接用DP会有问题，因为用例会有超大的`n`，导致中间计算出来的结果溢出。
+
+> `thread 'main' panicked at 'attempt to multiply with overflow', src\main.rs:12:28`
 
 所以只能走另一条路，就是求出最佳的切割方法，然后贪心。这个切割方法一句话就是能切3就切3，不行就切2，也就是n个3和1个2|2个2。
 
