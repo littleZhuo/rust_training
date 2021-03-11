@@ -8,4 +8,42 @@
 
 对于x的n次幂，等价于 `x^n = x^(2*n/2) = (x^2)^(n/2)`，其中除号`/`是非地板除。
 
-当n为偶数时没有问题，当n为奇数时可以转换成 `x*(x)
+我们设`dp[x][n] = x^n`，则`dp[x][n] = dp[x^2][n/2] `。
+
+进一步细化
+
+- 当n为偶数时，`dp[x][n] = dp[x^2][n//2]`
+- 当n为奇数时，`dp[x][n] = x * dp[x^2][n//2]`
+
+
+```rust
+fn help(x: f64, n: u32) -> f64 {
+  if n  == 0 {
+    return 1f64;
+  } else if n == 1 {
+    return x;
+  }
+
+  if n & 1 == 1 {
+    return help(x * x, n / 2) * x;
+  } else {
+    return help(x * x, n / 2);
+  }
+}
+
+impl Solution {
+  pub fn my_pow(mut x: f64, n: i32) -> f64 {
+    if x == 0f64 {
+      return x;
+    }
+
+    let mut n = n as i64;
+    if n < 0 {
+      x = 1f64 / x;      
+      n = -n;
+    }
+
+    return help(x, n as u32);
+  }
+}
+```
