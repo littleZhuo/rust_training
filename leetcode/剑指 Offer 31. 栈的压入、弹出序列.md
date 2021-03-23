@@ -10,7 +10,7 @@ impl Solution {
                 i_pop += 1;
             }
         }
-        return i_pop >= popped.len();
+        return secondary_stack.is_empty();
     }
 }
 ```
